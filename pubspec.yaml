@@ -19,6 +19,7 @@ dependencies:
   flutter_platform_widgets: ^3.3.5
   cached_network_image: ^3.2.3
   vector_math: ^2.1.4
+  firebase_core: ^2.14.0
 
 dev_dependencies:
   flutter_test:
