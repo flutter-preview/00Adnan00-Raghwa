@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '197362477946',
     projectId: 'raghwa-db7ce',
     storageBucket: 'raghwa-db7ce.appspot.com',
+    androidClientId: '197362477946-2fmqkrepqfa8gbpmu5kk9j6k124tu0rn.apps.googleusercontent.com',
     iosClientId: '197362477946-qhqq5c3ap1pu9lmhrdrjd46h029fl8mb.apps.googleusercontent.com',
     iosBundleId: 'ly.raghwa.raghwa',
   );

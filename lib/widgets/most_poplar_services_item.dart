@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:raghwa/screens/detailed_service_screen.dart';
@@ -6,17 +6,13 @@ import 'package:raghwa/screens/detailed_service_screen.dart';
 class MostPoplarServicesItem extends StatelessWidget {
   final double height;
   final double width;
-  final String title;
-  final String subtitle;
-  final String image;
+  final QueryDocumentSnapshot<Map<String, dynamic>> document;
 
   const MostPoplarServicesItem({
     super.key,
     this.width = double.infinity,
     this.height = 120,
-    required this.title,
-    required this.subtitle,
-    required this.image,
+    required this.document,
   });
 
   @override
@@ -30,8 +26,7 @@ class MostPoplarServicesItem extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => DetailedServiceScreen(
-                image: image,
-                name: title,
+                document: document,
               ),
             ));
           },
@@ -71,8 +66,8 @@ class MostPoplarServicesItem extends StatelessWidget {
                       ),
                       child: FractionallySizedBox(
                         heightFactor: 0.6,
-                        child: Image.asset(
-                          image,
+                        child: Image.network(
+                          document['image_url'],
                           height: double.infinity,
                         ),
                       ),
@@ -85,7 +80,7 @@ class MostPoplarServicesItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        title,
+                        document['name'],
                         maxLines: 2,
                         style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                               fontSize: constraints.maxHeight * 0.18,
@@ -95,7 +90,7 @@ class MostPoplarServicesItem extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        subtitle,
+                        document['description'],
                         maxLines: 3,
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
                               fontSize: constraints.maxHeight * 0.11,

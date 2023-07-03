@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "197362477946-2fmqkrepqfa8gbpmu5kk9j6k124tu0rn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ly.raghwa.raghwa",
+            "certificate_hash": "9c26bc7693924e7186e97ad6268768c9bcba30a7"
+          }
+        },
+        {
           "client_id": "197362477946-975s03b0nu2jkirmac2cllm4ttoktb0a.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -31,10 +39,46 @@
               "client_type": 3
             },
             {
-              "client_id": "197362477946-qhqq5c3ap1pu9lmhrdrjd46h029fl8mb.apps.googleusercontent.com",
+              "client_id": "197362477946-5j9avhtvd6ouqkr0b4r6rqltc0gk84sh.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "ly.raghwa.raghwa"
+                "bundle_id": "ly.raghwa.raghwa.raghwa"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197362477946:android:c7f9f9807505bea58b44c3",
+        "android_client_info": {
+          "package_name": "ly.raghwa.raghwa.raghwa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "197362477946-975s03b0nu2jkirmac2cllm4ttoktb0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDd0p7ODzhJZze4r5wUZnrVxxNS9Fn4J8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "197362477946-975s03b0nu2jkirmac2cllm4ttoktb0a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "197362477946-5j9avhtvd6ouqkr0b4r6rqltc0gk84sh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ly.raghwa.raghwa.raghwa"
               }
             }
           ]

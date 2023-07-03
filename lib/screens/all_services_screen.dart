@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:raghwa/widgets/service_item.dart';
@@ -22,25 +23,35 @@ class AllServicesScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: GridView.count(
-            shrinkWrap: true,
-            crossAxisCount: 3,
-            crossAxisSpacing: 0,
-            mainAxisSpacing: 12,
-            physics: const NeverScrollableScrollPhysics(),
-            children: List.generate(
-              6,
-              (index) {
-                return const ServiceItem(
-                  imageURL: 'assets/images/clothes_washing.png',
-                  name: 'غسيل ملابس',
-                );
-              },
-            ),
-          ),
-        ),
+        body: StreamBuilder(
+            stream: FirebaseFirestore.instance.collection('services').snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return const Center(child: CircularProgressIndicator.adaptive());
+              }
+
+              return Directionality(
+                textDirection: TextDirection.rtl,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: GridView.count(
+                    shrinkWrap: true,
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 0,
+                    mainAxisSpacing: 12,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: List.generate(
+                      snapshot.data!.docs.length,
+                      (index) {
+                        return ServiceItem(
+                          document: snapshot.data!.docs[index],
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              );
+            }),
       ),
     );
   }

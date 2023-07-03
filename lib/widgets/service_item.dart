@@ -1,18 +1,14 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:raghwa/screens/detailed_service_screen.dart';
 
 class ServiceItem extends StatelessWidget {
-  final String imageURL;
-  final String name;
+  final QueryDocumentSnapshot<Map<String, dynamic>> document;
 
-  const ServiceItem({
-    super.key,
-    required this.imageURL,
-    required this.name,
-  });
+  const ServiceItem({super.key, required this.document});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +17,7 @@ class ServiceItem extends StatelessWidget {
       onPressed: () {
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => DetailedServiceScreen(
-            image: imageURL,
-            name: name,
+            document: document,
           ),
         ));
       },
@@ -40,16 +35,17 @@ class ServiceItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: FractionallySizedBox(
-                  heightFactor: 0.6,
-                  child: Image.asset(
-                    imageURL,
+                  heightFactor: 0.65,
+                  child: Image.network(
+                    document['image_url'],
                     height: double.infinity,
                   ),
                 ),
               ),
               Text(
-                name,
+                document['name'],
                 maxLines: 2,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: constraints.maxHeight * 0.125,
                   color: Colors.black,

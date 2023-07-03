@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:raghwa/widgets/most_poplar_services_item.dart';
@@ -25,20 +26,26 @@ class AllPopularServices extends StatelessWidget {
             ),
           ),
         ),
-        body: Directionality(
-          textDirection: TextDirection.rtl,
-          child: ListView.separated(
-            itemCount: 2,
-            padding: const EdgeInsets.symmetric(horizontal: 19).copyWith(top: 20),
-            itemBuilder: (context, _) => MostPoplarServicesItem(
-              height: height * 0.17,
-              image: 'assets/images/clothes_washing.png',
-              title: 'غسيل ملابس',
-              subtitle: 'Lorem ipsum dolor sit amet  Lorem ipsum dolor sit amet consectetur suspendisse.consectetur',
-            ),
-            separatorBuilder: (_, __) => const SizedBox(height: 12),
-          ),
-        ),
+        body: StreamBuilder(
+            stream: FirebaseFirestore.instance.collection('services').snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return const Center(child: CircularProgressIndicator.adaptive());
+              }
+
+              return Directionality(
+                textDirection: TextDirection.rtl,
+                child: ListView.separated(
+                  itemCount: snapshot.data!.docs.length,
+                  padding: const EdgeInsets.symmetric(horizontal: 19).copyWith(top: 20),
+                  itemBuilder: (context, index) => MostPoplarServicesItem(
+                    height: height * 0.17,
+                    document: snapshot.data!.docs[index],
+                  ),
+                  separatorBuilder: (_, __) => const SizedBox(height: 12),
+                ),
+              );
+            }),
       ),
     );
   }
